@@ -80,7 +80,7 @@ function process(source, options) {
   const sourceLines = source.split(/\r?\n/);
 
   while (sourceLines.length > 0) {
-    const line = sourceLines.shift();
+    const line = sourceLines.shift().trim();
 
     if (line.length === 0) {
       outputLines.push(line);
