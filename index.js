@@ -237,30 +237,6 @@ function outputImports(statements, options) {
     return;
   }
 
-  statements.sort((a, b) => {
-    if (a.isAnonymous && b.isAnonymous) {
-      return a.path.localeCompare(b.path);
-    }
-
-    if (a.isDefault && b.isDefault === false) {
-      return -1;
-    }
-
-    if (a.isDefault === false && b.isDefault) {
-      return 1;
-    }
-
-    if (a.name.charCodeAt(0) < 97 && b.name.charCodeAt(0) >= 97) {
-      return -1;
-    }
-
-    if (a.name.charCodeAt(0) >= 97 && b.name.charCodeAt(0) < 97) {
-      return 1;
-    }
-
-    return a.name.localeCompare(b.name);
-  });
-
   for (const statement of statements) {
     if (statement.names.length > 0) {
       statement.names.sort((a, b) => {
@@ -275,7 +251,49 @@ function outputImports(statements, options) {
         return a.localeCompare(b);
       });
     }
+  }
 
+  statements.sort((a, b) => {
+    if (a.isAnonymous && b.isAnonymous) {
+      return a.path.localeCompare(b.path);
+    }
+
+    if (a.isDefault && b.isDefault === false) {
+      return -1;
+    }
+
+    if (a.isDefault === false && b.isDefault) {
+      return 1;
+    }
+
+    let nameA = a.name;
+    let nameB = b.name;
+
+    if (
+      a.isDefault === false &&
+      b.isDefault === false &&
+      a.isNamed &&
+      b.isNamed
+    ) {
+      nameA = a.names[0] ?? '';
+      nameB = b.names[0] ?? '';
+    } else {
+      nameA = a.name;
+      nameB = b.name;
+    }
+
+    if (nameA.charCodeAt(0) < 97 && nameB.charCodeAt(0) >= 97) {
+      return -1;
+    }
+
+    if (nameA.charCodeAt(0) >= 97 && nameB.charCodeAt(0) < 97) {
+      return 1;
+    }
+
+    return nameA.localeCompare(nameB);
+  });
+
+  for (const statement of statements) {
     const parts = ['import'];
 
     if (statement.isDefault) {
