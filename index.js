@@ -81,7 +81,7 @@ function process(source, options) {
   while (sourceLines.length > 0) {
     const chars = sourceLines[0].substring(0, 2).trim();
 
-    if (chars === '//' || chars === '/*' || chars === '*') {
+    if (chars === '//' || chars === '/*' || chars === '*' || chars === '*/') {
       comments.push(sourceLines.shift());
       continue;
     }
