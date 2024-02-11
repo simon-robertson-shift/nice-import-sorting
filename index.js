@@ -305,7 +305,7 @@ function extractImportStatementInfo(line, lines) {
     isMultiline: false,
   };
 
-  const chunks = line
+  let chunks = line
     .split(/[\s|;|,]+/)
     .filter(chunk => {
       // The TS `type` syntax will be supported in a future update.
@@ -314,6 +314,11 @@ function extractImportStatementInfo(line, lines) {
     .filter(chunk => {
       return chunk.length > 0;
     });
+
+  while (chunks.includes('as')) {
+    const index = chunks.indexOf('as');
+    chunks.splice(index - 1, 3, chunks[index - 1] + ' as ' + chunks[index + 1]);
+  }
 
   // import 'path'
   if (chunks.length === 2 && chunks[1] !== '{') {
