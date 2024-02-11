@@ -11,7 +11,6 @@ const { parsers: typescriptParsers } = require('prettier/parser-typescript');
  * @property {boolean} isAnonymous
  * @property {boolean} isDefault
  * @property {boolean} isNamed
- * @property {boolean} isMultiline
  */
 
 /**
@@ -37,7 +36,7 @@ const { parsers: typescriptParsers } = require('prettier/parser-typescript');
 function process(source, options) {
   // Make sure we are processing the entire file.
   if (options.rangeStart !== 0 || options.rangeEnd !== source.length) {
-    return;
+    return source;
   }
 
   const sortingRoots = options.niceImportSortingRoots.slice(0);
