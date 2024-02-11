@@ -229,6 +229,10 @@ function outputImports(statements, options) {
       return -1;
     }
 
+    if (a.name.charCodeAt(0) >= 97 && b.name.charCodeAt(0) < 97) {
+      return 1;
+    }
+
     return a.name.localeCompare(b.name);
   });
 
@@ -237,6 +241,10 @@ function outputImports(statements, options) {
       statement.names.sort((a, b) => {
         if (a.charCodeAt(0) < 97 && b.charCodeAt(0) >= 97) {
           return -1;
+        }
+
+        if (a.charCodeAt(0) >= 97 && b.charCodeAt(0) < 97) {
+          return 1;
         }
 
         return a.localeCompare(b);
