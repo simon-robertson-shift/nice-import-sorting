@@ -235,6 +235,10 @@ function outputImports(statements, options) {
   for (const statement of statements) {
     if (statement.names.length > 0) {
       statement.names.sort((a, b) => {
+        if (a.charCodeAt(0) < 97 && b.charCodeAt(0) >= 97) {
+          return -1;
+        }
+
         return a.localeCompare(b);
       });
     }
