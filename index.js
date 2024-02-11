@@ -25,11 +25,8 @@ const { parsers: typescriptParsers } = require('prettier/parser-typescript');
  * @typedef {object} PluginOptions
  * @property {string[]} niceImportSortingGroups
  * @property {string[]} niceImportSortingRoots
- * @property {string} endOfLine
- * @property {boolean} singleQuote
- * @property {number} tabWidth
- * @property {string} trailingComma
- * @property {boolean} useTabs
+ * @property {number} rangeStart
+ * @property {number} rangeEnd
  */
 
 /**
@@ -331,7 +328,6 @@ function extractImportStatementInfo(line, lines) {
     isAnonymous: false,
     isDefault: false,
     isNamed: false,
-    isMultiline: false,
   };
 
   let chunks = line
@@ -389,7 +385,6 @@ function extractImportStatementInfo(line, lines) {
     info.names = extractImportNames(chunks);
     info.path = extractImportPath(chunks);
     info.isDefault = true;
-    info.isMultiline = true;
     info.isNamed = true;
     return info;
   }
@@ -399,7 +394,6 @@ function extractImportStatementInfo(line, lines) {
     inlineMultilineNamedImports(chunks, lines);
     info.names = extractImportNames(chunks);
     info.path = extractImportPath(chunks);
-    info.isMultiline = true;
     info.isNamed = true;
     return info;
   }
