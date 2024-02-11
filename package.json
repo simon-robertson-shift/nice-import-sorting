@@ -1,0 +1,9 @@
+{
+  "name": "nice-import-sorting",
+  "version": "0.0.1",
+  "description": "Organises JS/TS imports in a human-friendly way.",
+  "repository": "https://github.com/simon-robertson-shift/nice-import-sorting.git",
+  "dependencies": {
+    "prettier": "^3"
+  }
+}
