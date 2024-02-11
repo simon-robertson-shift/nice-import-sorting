@@ -290,10 +290,10 @@ function extractImportStatementInfo(line, lines) {
   };
 
   const chunks = line
-    .split(/[\s|,]+/)
+    .split(/[\s|;|,]+/)
     .filter(chunk => {
       // The TS `type` syntax will be supported in a future update.
-      return chunk !== 'type' && chunk !== ';';
+      return chunk !== 'type';
     })
     .filter(chunk => {
       return chunk.length > 0;
