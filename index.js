@@ -61,6 +61,9 @@ function process(source, options) {
   });
 
   /** @type {string[]} */
+  const comments = [];
+
+  /** @type {string[]} */
   const directives = [];
 
   /** @type {ImportStatementInfo[]} */
@@ -78,6 +81,17 @@ function process(source, options) {
   /** @type {string[]} */
   const outputLines = [];
   const sourceLines = source.split(/\r?\n/);
+
+  while (sourceLines.length > 0) {
+    const chars = sourceLines[0].substring(0, 2).trim();
+
+    if (chars === '//' || chars === '/*' || chars === '*') {
+      comments.push(sourceLines.shift());
+      continue;
+    }
+
+    break;
+  }
 
   while (sourceLines.length > 0) {
     const line = sourceLines.shift().trim();
@@ -145,6 +159,7 @@ function process(source, options) {
     output: [],
   };
 
+  outputComments(comments, outputOptions);
   outputDirectives(directives, outputOptions);
   outputImports(imports, outputOptions);
 
@@ -183,6 +198,20 @@ function process(source, options) {
   }
 
   return outputLines.joins(eol);
+}
+
+/**
+ * @param {string[]} comments
+ * @return {void}
+ */
+function outputComments(comments, options) {
+  if (comments.length === 0) {
+    return;
+  }
+
+  for (const comment of comments) {
+    options.output.push(comment);
+  }
 }
 
 /**
