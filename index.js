@@ -98,7 +98,7 @@ function process(source, options) {
     }
 
     if (line.substring(1, 5) === 'use ') {
-      directives.push(line.substring(1, line.length - 1));
+      directives.push(line);
       continue;
     }
 
@@ -221,7 +221,7 @@ function outputDirectives(directives, options) {
   }
 
   for (const directive of directives) {
-    options.output.push('"' + directive + '"');
+    options.output.push(directive);
   }
 
   options.output.push('');
