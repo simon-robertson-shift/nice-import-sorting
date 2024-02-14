@@ -434,9 +434,7 @@ function extractImportNames(chunks) {
  * @return {string}
  */
 function extractImportPath(chunks) {
-  const path = chunks[chunks.length - 1];
-
-  return path.substring(1, path.length - 1);
+  return chunks[chunks.length - 1].replace(/["|']+/g, '');
 }
 
 /**
@@ -452,7 +450,7 @@ function inlineMultilineNamedImports(chunks, lines) {
     line = lines.shift();
   }
 
-  chunks.push(...line.split(/[\s|,]+/));
+  chunks.push(...line.split(/[\s|;|,]+/).filter(chunk => chunk.length > 0));
 }
 
 function preprocess(source, options) {
