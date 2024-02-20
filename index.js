@@ -362,6 +362,21 @@ function extractImportStatementInfo(line, lines) {
     chunks.splice(index - 1, 3, chunks[index - 1] + ' as ' + chunks[index + 1]);
   }
 
+  const cleaned = [];
+
+  for (let i = 0; i < chunks.length; i++) {
+    const chunk = chunks[i];
+
+    if (chunk.length > 1 && chunk.startsWith('{') && chunk.endsWith('}')) {
+      cleaned.push('{', chunk.substring(1, chunk.length - 1), '}');
+      continue;
+    }
+
+    cleaned.push(chunk);
+  }
+
+  chunks = cleaned;
+
   // import 'path'
   if (chunks.length === 2 && chunks[1] !== '{') {
     info.path = extractImportPath(chunks);
