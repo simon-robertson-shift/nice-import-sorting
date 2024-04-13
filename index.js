@@ -89,11 +89,25 @@ function process(source, options) {
     break;
   }
 
+  let forceLineAsOutput = false;
+
   while (sourceLines.length > 0) {
     const line = sourceLines.shift().trim();
 
-    if (line.length === 0) {
+    if (line.length === 0 || forceLineAsOutput) {
       outputLines.push(line);
+      continue;
+    }
+
+    if (
+      line.substring(0, 4) === 'let ' ||
+      line.substring(0, 5) === 'type ' ||
+      line.substring(0, 6) === 'const ' ||
+      line.substring(0, 7) === 'export ' ||
+      line.substring(0, 9) === 'function '
+    ) {
+      outputLines.push(line);
+      forceLineAsOutput = true;
       continue;
     }
 
