@@ -1,6 +1,6 @@
 {
   "name": "@nomemo/nice-import-sorting",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Organises JS/TS imports in a human-friendly way.",
   "repository": {
     "type": "git",
