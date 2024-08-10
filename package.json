@@ -1,6 +1,6 @@
 {
     "name": "@nomemo/nice-import-sorting",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "A Prettier plugin that sorts import statements within JS, JSX, TS, and TSX files using the import names instead of the module/path names.",
     "repository": {
         "type": "git",
