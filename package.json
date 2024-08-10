@@ -1,12 +1,18 @@
 {
-  "name": "@nomemo/nice-import-sorting",
-  "version": "0.0.7",
-  "description": "Organises JS/TS imports in a human-friendly way.",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/simon-robertson-shift/nice-import-sorting.git"
-  },
-  "dependencies": {
-    "prettier": "^3"
-  }
+    "name": "@nomemo/nice-import-sorting",
+    "version": "0.1.0",
+    "description": "A Prettier plugin that sorts import statements within JS, JSX, TS, and TSX files using the import names instead of the module/path names.",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/simon-robertson-shift/nice-import-sorting.git"
+    },
+    "dependencies": {
+        "prettier": "3.x"
+    },
+    "files": [
+        "lib/**/*",
+        "index.js",
+        "readme.md",
+        "license.md"
+    ]
 }
